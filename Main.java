@@ -11,23 +11,32 @@ public class Main
 
 
     int answer = 0;
-    while (sc.hasNext())  // as long as the Scanner has more lines to read from the file...
+    int position = 50; 
+
+    while (sc.hasNextLine())  // as long as the Scanner has more lines to read from the file...
     {
       String line = sc.nextLine();  // gets the next line of input.  This is like "R802"
+      char direction = line.charAt(0);
+      String numberPart = line.substring(1);
+      int amount = Integer.parseInt(numberPart);
+      if (direction == "R")
+      {
+        position = (position + amount) % 100;
+      }
+      else if (direction == "L")
+      {
+        position = (position - amount) % 100;
+        if (position < 0)
+        {
+          position += 100;
+        }
+      }
 
-      // TODO: Write code that gets the turning direction from the line.  This should be "L" or "R"
-
-
-      // TODO: Write code that gets a substring of the line that contains only the numbers
-      // For R802, this would be a String variable with the value "802"
-
-
-      // TODO: Using the parseInt method from the Integer class, convert the String "802" into an int
-
-
-      // TODO: Now that you have the turning direction, and the turning amount, see if the turn results in a 0
-
-
+      if (position == 0)
+      {
+        answer++;
+      }
+      
     }
 
     System.out.println("The password is " + answer);
